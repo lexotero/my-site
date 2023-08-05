@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-site-django
+  labels:
+    app: my-site
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-site
+  template:
+    metadata:
+      labels:
+        app: my-site
+    spec:
+      containers:
+        - image: 
+          name: my-site
+          ports:
+            - containerPort: 8000
+              name: uvicorn
+          env:
+            - name: BUILD_DEVELOPMENT
+              value: $(BUILD_DEVELOPMENT)
